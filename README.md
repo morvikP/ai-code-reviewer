@@ -1,123 +1,126 @@
 # AI Code Reviewer
 
-A minimal CLI tool for automated code review using the DeepSeek API. Built from scratch with Python — no frameworks, no API wrappers, just raw HTTP requests.
+Минималистичный CLI-инструмент для автоматического код-ревью через DeepSeek API. Написан с нуля на Python — никаких фреймворков и обёрток, только чистые HTTP-запросы.
 
-## Features
+## Возможности
 
-- ✅ Review single files (`.js`, `.py`, `.html`, `.css`, and more)
-- ✅ Choose model: `deepseek-chat` (default) or `deepseek-reasoner`
-- ✅ Focus areas: `security`, `performance`, `readability`, `bugs`
-- ✅ Save review to Markdown file
-- ✅ Recursive directory review
-- ✅ Diff mode — compare two file versions
-- ✅ Colorful terminal output
-- ✅ Proper error handling (no Python tracebacks)
+- ✅ Ревью отдельных файлов (`.js`, `.py`, `.html`, `.css` и других)
+- ✅ Выбор модели: `deepseek-chat` (по умолчанию) или `deepseek-reasoner`
+- ✅ Фокус-темы: `security`, `performance`, `readability`, `bugs`
+- ✅ Сохранение ревью в Markdown-файл
+- ✅ Рекурсивное ревью всей папки
+- ✅ Дифф-режим — сравнение двух версий файла
+- ✅ Цветной вывод в терминале
+- ✅ Понятные сообщения об ошибках (без Python traceback'ов)
 
-## Installation
+## Установка
 
 ```bash
-# Clone the repository
-git clone https://github.com/your-username/ai-code-reviewer.git
+# Клонируй репозиторий
+git clone https://github.com/morvikP/ai-code-reviewer.git
 cd ai-code-reviewer
 
-# No dependencies needed — uses only Python standard library!
+# Никаких зависимостей — только стандартная библиотека Python!
 ```
 
-## Setup
+## Настройка
 
-1. Get a DeepSeek API key at [platform.deepseek.com](https://platform.deepseek.com/api_keys)
-2. Create a `.env` file in the project directory:
+1. Получи API-ключ DeepSeek на [platform.deepseek.com](https://platform.deepseek.com/api_keys)
+2. Создай файл `.env` в папке проекта:
 
 ```bash
 cp .env.example .env
 ```
 
-3. Edit `.env` and add your key:
+3. Открой `.env` и вставь свой ключ:
 
 ```
-DEEPSEEK_API_KEY=sk-your-actual-key-here
+DEEPSEEK_API_KEY=sk-твой-ключ-здесь
 ```
 
-Alternatively, set the environment variable:
+Или установи переменную окружения:
 
 ```bash
-# Windows
-set DEEPSEEK_API_KEY=sk-your-actual-key-here
+# Windows (cmd)
+set DEEPSEEK_API_KEY=sk-твой-ключ-здесь
+
+# Windows (PowerShell)
+$env:DEEPSEEK_API_KEY="sk-твой-ключ-здесь"
 
 # Linux/Mac
-export DEEPSEEK_API_KEY=sk-your-actual-key-here
+export DEEPSEEK_API_KEY=sk-твой-ключ-здесь
 ```
 
-## Usage
+## Использование
 
-### Basic review
+### Базовое ревью
 
 ```bash
-python review.py path/to/your/file.py
+python review.py путь/к/файлу.py
 ```
 
-### Choose model
+### Выбор модели
 
 ```bash
 python review.py file.js --model deepseek-reasoner
 ```
 
-### Focus on a specific topic
+### Фокус на конкретную тему
 
 ```bash
-python review.py file.py --focus security
-python review.py file.py --focus performance
-python review.py file.py --focus readability
-python review.py file.py --focus bugs
+python review.py file.py --focus security     # Безопасность
+python review.py file.py --focus performance  # Производительность
+python review.py file.py --focus readability  # Читаемость
+python review.py file.py --focus bugs         # Поиск багов
 ```
 
-### Save review to file
+### Сохранение ревью в файл
 
 ```bash
 python review.py file.html --output review.md
 ```
 
-### Review all files in a directory
+### Ревью всей папки
 
 ```bash
 python review.py ./my-project --recursive
 ```
 
-### Diff mode (compare two versions)
+### Дифф-режим (сравнение двух версий)
 
 ```bash
 python review.py old.py new.py --diff
 ```
 
-## Screenshot
+## Скриншот
 
-![AI Code Reviewer in action](screenshot.png)
+![AI Code Reviewer в работе](screenshot.png)
 
-## How it works
+## Как это работает
 
-1. Reads the source file
-2. Builds a structured prompt for code review
-3. Sends an HTTP POST request to `https://api.deepseek.com/v1/chat/completions`
-4. Parses the JSON response
-5. Displays the review with nice formatting
+1. Программа читает исходный файл
+2. Формирует структурированный промпт для код-ревью
+3. Отправляет HTTP POST запрос на `https://api.deepseek.com/v1/chat/completions`
+4. Парсит JSON-ответ от модели
+5. Выводит ревью в красивом форматированном виде
 
-## Project structure
+## Структура проекта
 
 ```
 ai-code-reviewer/
-├── review.py          # Main CLI program
-├── .env.example       # Template for API key
-├── .gitignore         # Prevents .env from being committed
-└── README.md          # This file
+├── review.py          # Главная CLI-программа
+├── .env.example       # Шаблон для API-ключа
+├── .gitignore         # Защищает .env от коммита
+└── README.md          # Этот файл
 ```
 
-## What I learned
+## Что я узнал
 
-- How to make raw HTTP requests to LLM APIs
-- Why API keys must never be stored in code
-- How tools like Cline, Aider, and OpenCode work under the hood
-- JSON parsing and error handling in network applications
+- Как делать "ручные" HTTP-запросы к LLM API
+- Почему API-ключи нельзя хранить в коде
+- Как работают Cline, Aider и OpenCode под капотом
+- Парсинг JSON и обработка ошибок в сетевых приложениях
 
-## License
+## Лицензия
 
 MIT
